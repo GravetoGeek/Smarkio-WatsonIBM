@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "",
-    "password": "",
-    "database": "",
+    "username": "smarkio",
+    "password": "12345",
+    "database": "texttospeech",
     "host": "localhost",
     "dialect": "mysql",
     "define":{
@@ -11,9 +11,9 @@
     }
   },
   "test": {
-    "username": "",
-    "password": "",
-    "database": "",
+    "username": "smarkio",
+    "password": "12345",
+    "database": "texttospeech",
     "host": "localhost",
     "dialect": "mysql",
     "define":{
@@ -22,9 +22,9 @@
     }
   },
   "production": {
-    "username": "",
-    "password": "",
-    "database": "",
+    "username": "smarkio",
+    "password": "12345",
+    "database": "texttospeech",
     "host": "localhost",
     "dialect": "mysql",
     "define":{

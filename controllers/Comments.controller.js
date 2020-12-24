@@ -1,14 +1,19 @@
-const {Comment} = require('../models')
+const {Comments} = require('../models')
 const express = require('express')
 const watson = require('../watson')
 const Helpers = require('../helpers/Helpers')
 
 module.exports = {
+    /**
+     * Set
+     * @param {Request} req
+     * @param {Response} res
+     */
     // SET
-    async set(req,res){
+    async set(req,res, next){
         const {text} = req.body
         if(Helpers.existsOrError(text)){
-            return res.status(400).json({message: "Texto não informado"})
+            return res.sendStatus(400).json({message: "Texto não informado"})
         }
         let textToSpeech
         try{
@@ -16,11 +21,12 @@ module.exports = {
         }
         catch(error){
             console.log(error)
-            return res.status(500).json({message:error})
+            return res.sendStatus(500).json(error)
+            // return res.status(500).json({message:error})
         }
         let comments
         try{
-            comments = await Comment.create(
+            comments = await Comments.create(
                 {
                     text: text,
                     upload_file: textToSpeech.fileName,
@@ -29,14 +35,15 @@ module.exports = {
             )
         }
         catch(error){
-            return res.status(500).json(
-                {
-                    message: error.parent.sqlMessage
-                }
-            )
+            console.log(error)
+            return res.sendStatus(500).json(error)
+            // return res.status(500).json(
+            //     {
+            //         message: error
+            //     }
+            // )
         }
-
-        return res.status(200).json(
+        return res.sendStatus(200).json(
             {
                 text: comments.dataValues.text,
                 url: `audio/${comments.dataValues.upload_file}`
@@ -46,6 +53,12 @@ module.exports = {
     },
 
 
+
+    /**
+     * Get
+     * @param {Request} req
+     * @param {Response} res
+     */
     // GET
     async get(req,res){
         let comments;
@@ -53,7 +66,7 @@ module.exports = {
             comments = await Comment.findAll()
         }
         catch (error){
-            return res.status(500).json({message: error.parent.sqlMessage })
+            return res.status(500).json({message: error })
         }
 
         if(Helpers.existsOrError(comments)){

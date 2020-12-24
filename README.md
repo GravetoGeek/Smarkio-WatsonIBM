@@ -18,7 +18,7 @@ Crie um banco de dados.
 Altere as configurações no arquivo /config/config.json
 
 Duplique o arquivo .env.example e o renomeie para .env.
-Altere as configuraçõesdo arquivo .env.
+Altere as configurações do arquivo .env.
 
 Acesse o terminal no diretório /Smarkio-WatsonIBM e execute o comando:
 

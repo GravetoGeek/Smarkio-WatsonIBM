@@ -2,6 +2,48 @@
  ** CONFIG **
  ************/
 const urlBase = document.URL;
+
+
+/**
+* Template for add Coments
+* @param {String} text
+* @param {String} url
+* @param {String} date
+*/
+function templateComments(text, url, date) {
+    // const dateFormatted = new Date(date);
+    const urlFormatted = urlBase + url;
+    return `
+    <li>
+        <i class="fa fa-comment" aria-hidden="true"></i>
+        <p>${text}</p>
+        <button type="button" onclick="playAudio('${urlFormatted}')" class="btn btn-secondary col-2 offset" title='Escute o comentário'><i class="fa fa-volume-up" aria-hidden="true"></i>Ouça</button>
+        <audio controls id='${urlFormatted}' style='display:none'>
+            <source src="${urlFormatted}" type="audio/wav">
+        </audio>
+    </li>
+    `
+}
+
+
+/**
+ * Include Comments
+ * @param {Array} comments
+ */
+function includeComments(comments) {
+    let html = "";
+    const listBody = document.getElementById("commentsList");
+
+    if (comments.length > 0) {
+        comments.forEach((comment) => {
+            html += templateComments(comment.text, comment.url)
+        })
+        listBody.innerHTML = html;
+    }
+}
+
+
+
 /**
  * Send default
  */
@@ -11,16 +53,9 @@ function send() {
     const button = document.getElementById("button")
     button.disabled = true;
     var http = new XMLHttpRequest()
-    let statusCode = null;
-    http.onload = function () {
-        statusSend(this.status)
-        statusCode = this.status
-        get()
-    }
     http.open("POST", urlBase + "comments", true);
     http.setRequestHeader('Content-type', 'application/json');
-    http.send(JSON.stringify({ text: comment }));
-    setTimeout(() => { clear(); statusCode == null ? statusSend(500) : get()}, 5000)
+    http.send(JSON.stringify({ text: comment }))
 }
 
 
@@ -61,22 +96,6 @@ function statusSend(statusCode) {
     errorClass.innerHTML = error
 }
 
-
-/**
- * Include Comments
- * @param {Array} comments
- */
-function includeComments(comments) {
-    let html = "";
-    const listBody = document.getElementById("commentsList");
-
-    if (comments.length > 0) {
-        comments.forEach((comment) => {
-            html += templateAddComments(comment.text, comment.url, comment.date)
-        })
-        listBody.innerHTML = html;
-    }
-}
 
 
 /**
@@ -154,27 +173,6 @@ function templateNotFound() {
     `;
 }
 
-/**
- * Template for add Coments
- * @param {String} text
- * @param {String} url
- * @param {String} date
- */
-function templateAddComments(text, url, date) {
-    const dateFormatted = new Date(date);
-    const urlFormatted = urlBase + url;
-    return `
-    <div class='col-12 comments'>    
-        <div class="col-2">
-            <button class="btn btn-info btn-sm" onclick="playAudio('${urlFormatted}')" type="button" style='float: right'
-                title='Escute o comentário'>
-                <i class="fa fa-volume-up" aria-hidden="true"></i> Ouvir</button>
-                <audio controls id='${urlFormatted}' style='display:none;'>
-                    <source src="${urlFormatted}" type="audio/wav">
-                </audio>
-        </div>
-    </div>
-    `;
-}
+
 
 get();
