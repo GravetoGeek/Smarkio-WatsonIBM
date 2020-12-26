@@ -13,7 +13,7 @@ module.exports = {
     async set(req,res, next){
         const {text} = req.body
         if(Helpers.existsOrError(text)){
-            return res.sendStatus(400).json({message: "Texto não informado"})
+            return res.status(400).json({message: "Texto não informado"})
         }
         let textToSpeech
         try{
@@ -21,7 +21,7 @@ module.exports = {
         }
         catch(error){
             console.log(error)
-            return res.sendStatus(500).json(error)
+            return res.status(500).json(error)
             // return res.status(500).json({message:error})
         }
         let comments
@@ -36,20 +36,15 @@ module.exports = {
         }
         catch(error){
             console.log(error)
-            return res.sendStatus(500).json(error)
-            // return res.status(500).json(
-            //     {
-            //         message: error
-            //     }
-            // )
+            return res.status(500).json(error)
         }
-        return res.sendStatus(200).json(
-            {
-                text: comments.dataValues.text,
-                url: `audio/${comments.dataValues.upload_file}`
+            return res.status(200).json(
+                {
+                    text: comments.dataValues.text,
+                    url: `audio/${comments.dataValues.upload_file}`
 
-            }
-        )
+                }
+            )
     },
 
 
@@ -61,12 +56,13 @@ module.exports = {
      */
     // GET
     async get(req,res){
-        let comments;
+        let comments
         try{
-            comments = await Comment.findAll()
+            comments = await Comments.findAll()
+            console.log(comments)
         }
         catch (error){
-            return res.status(500).json({message: error })
+            return res.status(500).json({ message: error.parent.sqlMessage})
         }
 
         if(Helpers.existsOrError(comments)){

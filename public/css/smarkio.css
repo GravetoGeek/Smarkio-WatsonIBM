@@ -1,0 +1,14 @@
+main{
+    background-color: #ccc;
+    padding: 10px 10px 10px 10px;
+}
+
+ul{
+    list-style-type: none;
+}
+
+li{
+    display:flex;
+    justify-content:flex-start;
+    margin-bottom: 15px;
+}

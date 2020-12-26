@@ -10,13 +10,13 @@ const urlBase = document.URL;
 * @param {String} url
 * @param {String} date
 */
-function templateComments(text, url, date) {
+function templateComments(text, url) {
     // const dateFormatted = new Date(date);
     const urlFormatted = urlBase + url;
     return `
     <li>
         <i class="fa fa-comment" aria-hidden="true"></i>
-        <p>${text}</p>
+        <p class="col-8">${text}</p>
         <button type="button" onclick="playAudio('${urlFormatted}')" class="btn btn-secondary col-2 offset" title='Escute o comentário'><i class="fa fa-volume-up" aria-hidden="true"></i>Ouça</button>
         <audio controls id='${urlFormatted}' style='display:none'>
             <source src="${urlFormatted}" type="audio/wav">
@@ -53,9 +53,19 @@ function send() {
     const button = document.getElementById("button")
     button.disabled = true;
     var http = new XMLHttpRequest()
+    let statusCode = null;
+    http.onload = function () {
+        statusSend(this.status);
+        statusCode = this.status;
+        get()
+    }
     http.open("POST", urlBase + "comments", true);
     http.setRequestHeader('Content-type', 'application/json');
     http.send(JSON.stringify({ text: comment }))
+    setTimeout(() => {
+        clear()
+        statusCode == null ? statusSend(500) : get()
+    }, 5000)
 }
 
 
@@ -69,7 +79,7 @@ function get() {
     http.responseType = 'json'
     http.send()
     return http.onload = function () {
-        if (this.status === 200) {
+        if (this.status == 200) {
             includeComments(this.response)
         } else {
             errorComments(this.response, this.status)

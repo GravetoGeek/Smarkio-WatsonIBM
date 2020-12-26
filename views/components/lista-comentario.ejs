@@ -1,13 +1,6 @@
 <div class="col-6 offset justify-content-center">
     <h3>Comentários</h3>
-    <ul class="commentsList col-10">
-        <li>
-            <i class="fa fa-comment" aria-hidden="true"></i>
-            <p>${text}</p>
-            <button type="button" onclick="playAudio('${urlFormatted}')" class="btn btn-secondary col-2 offset" title='Escute o comentário'><i class="fa fa-volume-up" aria-hidden="true"></i>Ouça</button>
-            <audio controls id='${urlFormatted}' style='display:none'>
-                <source src="${urlFormatted}" type="audio/wav">
-            </audio>
-        </li>
+    <ul id="commentsList" class="col-12">
+
     </ul>
 </div>

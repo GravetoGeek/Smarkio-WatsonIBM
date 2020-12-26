@@ -24,15 +24,15 @@ module.exports = {
                 return textToSpeech.repairWavHeaderStream(audio);
             })
             .then(repairedFile => {
-                fs.writeFileSync(__dirname + '/audio/' + fileName + date + '.wav', repairedFile);
-                console.log(fileName + date + '.wav create success');
+                fs.writeFileSync(__dirname + '/public/audio/' + fileName + date + '.wav', repairedFile);
+                console.log(fileName + date + '.wav criado com sucesso!');
             })
             .catch(err => {
                 throw err;
             });
         return {
             fileName: fileName + date + '.wav',
-            fileDir: __dirname + '/audio/' + fileName + date + '.wav'
+            fileDir: __dirname + '/public/audio/' + fileName + date + '.wav'
         }
     }
 
