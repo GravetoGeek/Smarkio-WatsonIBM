@@ -65,7 +65,7 @@ function send() {
     setTimeout(() => {
         clear()
         statusCode == null ? statusSend(500) : get()
-    }, 5000)
+    }, 15000)
 }
 
 
@@ -97,11 +97,11 @@ function statusSend(statusCode) {
     let errorClass = document.getElementById("status")
     let error
     if (statusCode == 200) {
-        error = "<span class='alert-success' style='border-radius: 20px;padding: 0 10px;'><i class='fa fa-check-circle' aria-hidden='true'></i> Comentário cadastrado com sucesso!</span > ";
+        error = "<span class='alert-success'><i class='fa fa-check-circle' aria-hidden='true'></i> Comentário cadastrado com sucesso!</span > ";
     } else if (statusCode == 500) {
-        error = "<span class='alert-danger' style='border-radius: 20px;padding: 0 10px;'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> Não foi possível conectar ao servidor! </span > ";
+        error = "<span class='alert-danger'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> Não foi possível conectar ao servidor! </span > ";
     } else {
-        error = "<span class='alert-danger' style='border-radius: 20px;padding: 0 10px;'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> Ocorreu um erro! </span > ";
+        error = "<span class='alert-danger'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> Ocorreu um erro! </span > ";
     }
     errorClass.innerHTML = error
 }
