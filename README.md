@@ -28,15 +28,18 @@ npm install
 4. Renomeie o arquivo ".env.example" para ".env" e altere as configurações.
 
 ```
-HOST_MYSQL=
-DATABASE_NAME=
-DATABASE_USER=
-DATABASE_PASSWORD=
-PORT=
+# Server
+NODE_PORT=8888
 
-#Watson
-TEXT_TO_SPEECH_IAM_APIKEY=
-TEXT_TO_SPEECH_URL=
+# MySQL
+MYSQL_HOST=localhost
+MYSQL_USER=UsuarioDB
+MYSQL_PASS=SenhaDB
+MYSQL_DB=bancodedados
+
+# IBM Cloud
+TTS_API_KEY=key
+TTS_URL=url
 ```
 
 5. Acesse o terminal no diretório /Smarkio-WatsonIBM e execute o comando:
