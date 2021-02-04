@@ -29,3 +29,6 @@ li{
     padding: 0 10px;
 }
 
+.verticalLine{
+    border-left: 2px solid grey;
+}

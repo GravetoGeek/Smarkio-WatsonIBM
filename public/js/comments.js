@@ -161,7 +161,7 @@ function templateError() {
     return `<div class="col-12" style="display: grid;justify-content: center;">
     <lottie-player src="https://assets9.lottiefiles.com/datafiles/HF2l8DiOyOT4dwI/data.json" background="transparent"  speed="1"  style="width: 300px; height: auto;margin-top: -80px;" autoplay>
     </lottie-player>
-    <span style='display:block; text-align: center; margin-top: -25px;font-weight: bold;'>
+    <span style='display:block; text-align: center; margin-top: 0px;font-weight: bold;'>
      Opss... ocorreu um erro no servidor!
     </span>
     </div>
@@ -176,7 +176,7 @@ function templateError() {
 function templateNotFound() {
     return `<div class="col-12" style="display: grid;justify-content: center;">
     <lottie-player src="https://assets9.lottiefiles.com/datafiles/Qmze6foNYQLQGCK/data.json"  background="transparent"  speed="1"  style="width: 300px; height: auto;margin-top: -50px;"    autoplay></lottie-player>
-    <span style='display:block; text-align: center; margin-top: -25px;font-weight: bold;'>
+    <span style='display:block; text-align: center; margin-top: 0px;font-weight: bold;'>
      Opss... Não encontramos nada!
     </span>
     </div>
